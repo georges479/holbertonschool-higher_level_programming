@@ -4,3 +4,4 @@
 class Square:
     """This class represents a square. Currently, it has no attributes or methods."""
     pass
+
