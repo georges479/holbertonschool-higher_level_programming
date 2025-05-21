@@ -28,7 +28,7 @@ class Square:
         return self.__size * self.__size
 
     def my_print(self):
-         """Print the square with the character '#' to stdout.
+        """Print the square with the character '#' to stdout.
 
         If the size is 0, print an empty line.
         """
