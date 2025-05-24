@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module defining a Square class with size validation."""
 
+
 class Square:
     """Class that defines a square by its size.
 
@@ -17,7 +18,7 @@ class Square:
             TypeError: If size is not an integer.
             ValueError: If size is less than 0.
         """
-        if type(size) != int:
+        if type(size) is int:
             raise TypeError("size must be an integer")
         if size < 0:
             raise ValueError("size must be >= 0")
@@ -26,4 +27,3 @@ class Square:
     def area(self):
         """Return the area of the square."""
         return self.__size * self.__size
-
