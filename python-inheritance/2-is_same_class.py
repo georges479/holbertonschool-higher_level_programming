@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""2-is_same_class.py - Function to check if an object is an instance of a class"""
+"""2-is_same_class.py - Function to check if an object is
+an instance of a class"""
 
 
 def is_same_class(obj, a_class):
