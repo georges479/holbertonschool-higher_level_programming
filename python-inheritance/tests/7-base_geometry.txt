@@ -1,0 +1,87 @@
+The ``BaseGeometry`` module
+======================
+
+Using ``BaseGeometry``
+-------------------
+
+
+First import the class from the ``7-base_geometry`` file:
+
+    >>> bg = __import__('7-base_geometry').BaseGeometry()
+
+Tests:
+
+    Test - bg is an instance of BaseGeometry
+    >>> bg.__class__
+    <class '7-base_geometry.BaseGeometry'>
+
+    Test - bg is an instance of BaseGeometry
+    >>> bg.__class__.__name__
+    'BaseGeometry'
+
+    Test - area will throw an Exception
+    >>> bg.area()
+    Traceback (most recent call last):
+    ...
+    Exception: area() is not implemented
+
+    Test - name is not an int
+    >>> bg.integer_validator("name", "haha")
+    Traceback (most recent call last):
+    ...
+    TypeError: name must be an integer
+
+    Test - age is more than 0
+    >>> bg.integer_validator("age", 1)
+
+    Test - age is exactly 0
+    >>> bg.integer_validator("age", 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: age must be greater than 0
+
+    Test - age is less than 0
+    >>> bg.integer_validator("age", -100)
+    Traceback (most recent call last):
+    ...
+    ValueError: age must be greater than 0
+
+    Test - age value is tuple
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    Test - age value is list
+    >>> bg.integer_validator("age", [3])
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    Test - age value is Boolean
+    >>> bg.integer_validator("age", True)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    Test - age value is an assoc array
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    Test - age value is None
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age")
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'

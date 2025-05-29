@@ -1,0 +1,43 @@
+The ``MyList`` module
+======================
+
+Using ``MyList``
+-------------------
+
+
+First import ``print_sorted`` from the ``1-my_list`` file:
+
+    >>> ps = __import__('1-my_list').MyList.print_sorted
+
+Tests:
+
+    Test - check that sorting works
+    >>> ps([1, 4, 2, 3, 5])
+    [1, 2, 3, 4, 5]
+    [1, 4, 2, 3, 5]
+
+    Test - list contains non-integer values (string)
+    >>> ps(["haha", 2, 1])
+    Traceback (most recent call last):
+    ...
+    TypeError: '<' not supported between instances of 'int' and 'str'
+
+    Test - list contains float values
+    >>> ps([4.5, 2, 1])
+    [1, 2, 4.5]
+    [4.5, 2, 1]
+
+    Test - list is empty
+    >>> ps([])
+    []
+    []
+
+    Test - all values are the same
+    >>> ps([1, 1, 1, 1])
+    [1, 1, 1, 1]
+    [1, 1, 1, 1]
+
+    Test - only one value
+    >>> ps([999])
+    [999]
+    [999]
