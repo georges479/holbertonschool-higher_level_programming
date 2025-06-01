@@ -1,0 +1,1 @@
+_python_abstract_methode_and_abc_class
