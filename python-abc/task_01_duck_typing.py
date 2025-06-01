@@ -48,5 +48,5 @@ class Rectangle(Shape):
 
 def shape_info(obj):
     """Return a straing representation of the shape"""
-    print(obj.area())
-    print(obj.perimeter())
+    print("Area:", obj.area())
+    print("Perimeter:", obj.perimeter())
