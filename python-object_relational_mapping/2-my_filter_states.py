@@ -1,22 +1,18 @@
 #!/usr/bin/python3
 """
 Displays all values in the states table of the database hbtn_0e_0_usa
-where name matches the argument.
+where name matches the argument (safe from SQL injections).
 
 Usage:
-    ./script.py <mysql username> <mysql password>
+    ./2-my_filter_states.py <mysql username> <mysql password>
     <database name> <state name searched>
-
-Connects to localhost on port 3306.
-Uses string formatting to create the SQL query.
-Results sorted by states.id in ascending order.
 """
 
 import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    # Connexion à la base de données
+    # Connect to database
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -26,13 +22,13 @@ if __name__ == "__main__":
     )
     cursor = db.cursor()
 
-    # Construction de la requête SQL avec format()
-    query = ("SELECT * FROM states WHERE name = '{}' "
-             "ORDER BY id ASC").format(sys.argv[4])
+    # SQL query with placeholders to avoid SQL injection
+    cursor.execute(
+        "SELECT * FROM states WHERE name = %s ORDER BY id ASC",
+        (sys.argv[4],)
+    )
 
-    cursor.execute(query)
-
-    # Affichage des résultats
+    # Print matching states
     for state in cursor.fetchall():
         print(state)
 
