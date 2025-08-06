@@ -2,36 +2,35 @@
 """
 Prints the first State object from the database hbtn_0e_6_usa.
 
-Usage:
-    ./8-model_state_fetch_first.py <mysql username> <mysql password> <database name>
+Usage: ./script.py <mysql username> <mysql password> <database name>
 
-Connects to the MySQL database using SQLAlchemy ORM and
-prints the first State object ordered by id or "Nothing" if none found.
+- Uses SQLAlchemy
+- Imports State and Base from model_state
+- Connects to MySQL on localhost at port 3306
+- Prints the first State by states.id ascending
+- Prints "Nothing" if no state found
+- Does not fetch all states before displaying the result
 """
 
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import State
+from model_state import Base, State
 
-
-def main():
-    """Connect to the database and print the first State object."""
+if __name__ == "__main__":
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost/{}".format(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
             sys.argv[1], sys.argv[2], sys.argv[3]
         ),
-        pool_pre_ping=True
+        pool_pre_ping=True,
     )
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).order_by(State.id).first()
-    if state is None:
+    # Query only the first state ordered by id, without loading all states
+    first_state = session.query(State).order_by(State.id).first()
+
+    if first_state is None:
         print("Nothing")
     else:
-        print(f"{state.id}: {state.name}")
-
-
-if __name__ == "__main__":
-    main()
+        print(f"{first_state.id}: {first_state.name}")

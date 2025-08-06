@@ -1,45 +1,38 @@
 #!/usr/bin/python3
 """
-Adds the State object "Louisiana" to the database hbtn_0e_6_usa.
+Adds the State object “Louisiana” to the database hbtn_0e_6_usa.
 
-Usage:
-    ./11-model_state_insert.py <mysql username> <mysql password> <database name>
+Usage: ./script.py <mysql username> <mysql password> <database name>
 
-Connects to the MySQL database using SQLAlchemy ORM,
-creates a new State object with the name "Louisiana",
-adds it to the current session, commits the session,
-and prints the id of the newly added state.
+- Uses SQLAlchemy
+- Imports State and Base from model_state
+- Connects to MySQL on localhost at port 3306
+- Prints the new state's id after creation
+- Code not executed when imported
 """
 
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import State
+from model_state import Base, State
 
-
-def main():
-    """Create and add a new State named 'Louisiana' to the database."""
-    # Create the SQLAlchemy engine to connect to the MySQL database
+if __name__ == "__main__":
+    # Create engine and session
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost/{}".format(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
             sys.argv[1], sys.argv[2], sys.argv[3]
         ),
         pool_pre_ping=True
     )
-    # Create a configured "Session" class
     Session = sessionmaker(bind=engine)
-    # Create a Session instance
     session = Session()
 
-    # Instantiate a new State object with name "Louisiana"
-    louisiana = State(name="Louisiana")
-    # Add the new object to the session
-    session.add(louisiana)
-    # Commit the session to save the new State to the database
+    # Create new State object with name "Louisiana"
+    new_state = State(name="Louisiana")
+
+    # Add to session and commit
+    session.add(new_state)
     session.commit()
-    # Print the id of the new State object (assigned by the database)
-    print(louisiana.id)
 
-
-if __name__ == "__main__":
-    main()
+    # Print the new state's id
+    print(new_state.id)

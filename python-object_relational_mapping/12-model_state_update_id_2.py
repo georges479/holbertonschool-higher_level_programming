@@ -3,43 +3,33 @@
 Changes the name of the State object with id = 2 to "New Mexico"
 in the database hbtn_0e_6_usa.
 
-Usage:
-    ./12-model_state_update_id_2.py <mysql username> <mysql password> <database name>
+Usage: ./script.py <mysql username> <mysql password> <database name>
 
-Connects to the MySQL database using SQLAlchemy ORM,
-fetches the State object with id 2,
-updates its name to "New Mexico",
-and commits the change to the database.
+- Uses SQLAlchemy
+- Imports State and Base from model_state
+- Connects to MySQL on localhost at port 3306
+- Changes the name of the State where id = 2
+- Code not executed when imported
 """
 
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import State
+from model_state import Base, State
 
-
-def main():
-    """Update the State name where id is 2 to 'New Mexico'."""
-    # Create engine to connect to the MySQL database
+if __name__ == "__main__":
+    # Create engine and session
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost/{}".format(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
             sys.argv[1], sys.argv[2], sys.argv[3]
         ),
         pool_pre_ping=True
     )
-    # Create a configured session class
     Session = sessionmaker(bind=engine)
-    # Instantiate a session
     session = Session()
 
-    # Query the State with id=2
+    # Query the state with id = 2
     state = session.query(State).filter_by(id=2).first()
-    if state is not None:
-        # Update the State's name
+    if state:
         state.name = "New Mexico"
-        # Commit the changes
         session.commit()
-
-
-if __name__ == "__main__":
-    main()

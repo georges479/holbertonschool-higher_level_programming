@@ -1,29 +1,38 @@
 #!/usr/bin/python3
 """
-Displays all states from the database hbtn_0e_0_usa
-whose name matches the argument provided (case-sensitive).
+Displays all values in the states table of the database hbtn_0e_0_usa
+where name matches the argument.
 
 Usage:
-    ./2-my_filter_states.py <mysql username> <mysql password> <database name> <state name searched>
+    ./script.py <mysql username> <mysql password> <database name> <state name searched>
 
-Connects to the MySQL database and fetches states
-with a name exactly matching the provided argument.
+Connects to localhost on port 3306.
+Uses string formatting to create the SQL query.
+Results sorted by states.id in ascending order.
 """
 
 import sys
 import MySQLdb
 
-
-def main():
-    """Connect to the database and print states matching the name argument."""
-    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+if __name__ == "__main__":
+    # Connexion à la base de données
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
+    )
     cursor = db.cursor()
-    query = ("SELECT * FROM `states` WHERE BINARY `name` = %s")
-    cursor.execute(query, (sys.argv[4],))
-    states = cursor.fetchall()
-    for state in states:
+
+    # Construction de la requête SQL avec format()
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4])
+
+    cursor.execute(query)
+
+    # Affichage des résultats
+    for state in cursor.fetchall():
         print(state)
 
-
-if __name__ == "__main__":
-    main()
+    cursor.close()
+    db.close()
