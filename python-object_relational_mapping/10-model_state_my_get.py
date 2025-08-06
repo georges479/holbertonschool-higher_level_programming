@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """
-Prints the State object with the name passed as argument from the database hbtn_0e_6_usa.
+Prints the State object with the name passed as argument
+from the database hbtn_0e_6_usa.
 
-Usage: ./script.py <mysql username> <mysql password> <database name> <state name>
+Usage: ./script.py <mysql username> <mysql password>
+<database name> <state name>
 
 - Uses SQLAlchemy
 - Imports State and Base from model_state

@@ -15,6 +15,7 @@ from model_state import Base
 
 
 class City(Base):
+    """City class that represents the cities table in MySQL database"""
     __tablename__ = 'cities'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)

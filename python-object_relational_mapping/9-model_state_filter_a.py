@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Lists all State objects that contain the letter 'a' from the database hbtn_0e_6_usa.
+Lists all State objects that contain the letter 'a'
+from the database hbtn_0e_6_usa.
 
 Usage: ./script.py <mysql username> <mysql password> <database name>
 
@@ -28,8 +29,9 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Filter states with 'a' in their name (case sensitive) and order by id ascending
-    states_with_a = session.query(State).filter(State.name.like('%a%')).order_by(State.id)
+    # Filter states with 'a' in their name and order by id ascending
+    states_with_a = session.query(State)\
+        .filter(State.name.like('%a%')).order_by(State.id)
 
     for state in states_with_a:
         print(f"{state.id}: {state.name}")

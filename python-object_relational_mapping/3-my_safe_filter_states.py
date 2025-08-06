@@ -4,7 +4,8 @@ Displays all values in the states table of the database hbtn_0e_0_usa
 where name matches the argument, safe from MySQL injections.
 
 Usage:
-    ./script.py <mysql username> <mysql password> <database name> <state name searched>
+    ./script.py <mysql username> <mysql password>
+    <database name> <state name searched>
 
 Connects to localhost on port 3306.
 Results sorted in ascending order by states.id.
