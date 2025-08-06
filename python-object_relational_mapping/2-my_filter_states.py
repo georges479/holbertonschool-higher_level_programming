@@ -19,9 +19,9 @@ if __name__ == "__main__":
     )
     cursor = db.cursor()
 
-    # Create SQL query using format (as required by instructions)
-    query = "SELECT * FROM states WHERE name = \
-    '{}' ORDER BY id ASC".format(sys.argv[4])
+    # Enforce case-sensitive comparison with BINARY + format()
+    query = "SELECT * FROM states WHERE BINARY name = \
+        '{}' ORDER BY id ASC".format(sys.argv[4])
 
     cursor.execute(query)
 
